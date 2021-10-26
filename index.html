@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.js"></script>
+    <title>js调起pc客户端</title>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.9.1/vconsole.min.js"></script>
+<!-- <script src="./vconsole-sources.min.js"></script> -->
+
+</head>
+<body>
+    <!-- <button id="openApp">openApp</button> -->
+    <button onclick="newTabUseDOM()">111111111</button>
+    <script>
+        // VConsole 默认会挂载到 `window.VConsole` 上
+        var vConsole = new window.VConsole({
+            // defaultPlugins:['system', 'network', 'element', 'storage']
+        });
+        console.log(navigator.userAgent)
+        console.log(  vConsole.option)
+        // vConsole.setOption({defaultPlugins: ['system', 'network', 'element', 'storage','Source']});
+        console.log(vConsole.tabList,'安装的list')
+        function newTabUseDOM() {
+          console.info('newTabUseDOM() Start');
+          var tab = new vConsole.VConsolePlugin('tab5', 'Tab5');
+          var $elm = document.createElement('DIV');
+          $elm.innerHTML = '<p>It works</p>';
+          tab.on('renderTab', function(cb) {
+            cb($elm);
+          });
+  vConsole.addPlugin(tab);
+  console.info('newTabUseDOM() End');
+}
+      </script>
+    <script>
+        
+       window.onload = function(){
+        console.log(axios)
+       axios({
+           url:"http://112.74.14.143:8085/api/getProductList",
+           method:"post",
+           data:
+            {"pageIndex":1,"pageSize":9,"cateId":"","brandId":""}
+           
+       })
+
+    //
+       }
+      
+       
+    </script>
+</body>
+<!-- <script src="./vconsole-sources.min.js"></script> -->
+
+</html>
